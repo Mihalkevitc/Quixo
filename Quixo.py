@@ -1,17 +1,36 @@
 import random
 
-# Функция для создания пустой доски
 def create_board():
+    """
+    Создает пустую доску для игры в крестики-нолики.
+
+    Returns:
+    list: Двумерный список, представляющий игровую доску.
+    """
     return [['-' for _ in range(5)] for _ in range(5)]
 
-# Функция для отображения доски
 def display_board(board):
+    """
+    Отображает текущее состояние игровой доски.
+
+    Args:
+    board (list): Двумерный список, представляющий игровую доску.
+    """
     for row in board:
         print(' '.join(row))
     print()
 
-# Функция для проверки выигрышной комбинации
 def check_win(board, symbol):
+    """
+    Проверяет, есть ли выигрышная комбинация на игровой доске.
+
+    Args:
+    board (list): Двумерный список, представляющий игровую доску.
+    symbol (str): Символ игрока ('X' или 'O').
+
+    Returns:
+    bool: True, если найдена выигрышная комбинация, иначе False.
+    """
     for row in board:
         if all(cell == symbol for cell in row):
             return True
@@ -22,8 +41,17 @@ def check_win(board, symbol):
         return True
     return False
 
-# Функция для хода игрока
 def player_move(board, symbol):
+    """
+    Выполняет ход игрока.
+
+    Args:
+    board (list): Двумерный список, представляющий игровую доску.
+    symbol (str): Символ игрока ('X' или 'O').
+
+    Returns:
+    list: Обновленное состояние игровой доски.
+    """
     while True:
         row, col = map(int, input(f'Введите координаты для символа "{symbol}" (строка столбец): ').split())
         if 0 <= row < 5 and 0 <= col < 5 and board[row][col] == '-':
@@ -33,15 +61,26 @@ def player_move(board, symbol):
             print('Некорректный ход. Попробуйте еще раз.')
     return board
 
-# Функция для хода компьютера
 def computer_move(board, symbol):
+    """
+    Выполняет ход компьютера.
+
+    Args:
+    board (list): Двумерный список, представляющий игровую доску.
+    symbol (str): Символ компьютера ('X' или 'O').
+
+    Returns:
+    list: Обновленное состояние игровой доски.
+    """
     available_moves = [(row, col) for row in range(5) for col in range(5) if board[row][col] == '-']
     row, col = random.choice(available_moves)
     board[row][col] = symbol
     return board
 
-# Основной игровой цикл
 def play_game():
+    """
+    Основной игровой цикл.
+    """
     board = create_board()
     symbols = ['X', 'O']
     random.shuffle(symbols)
