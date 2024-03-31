@@ -1,0 +1,5 @@
+# Файл зависимостей для проекта Quixo
+requests==2.25.1
+flask==1.1.2
+numpy==1.21.0
+matplotlib==3.4.2
